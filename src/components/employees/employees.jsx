@@ -7,7 +7,22 @@ class Employees extends Component {
   };
 
   async componentDidMount() {
+    await this.refreshData();
+    this.interval = setInterval(() => this.refreshData(), 10000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  handleClick = (event) => {
+    event.currentTarget.classList.toggle('active');
+    event.currentTarget.children[0].classList.toggle('employee-expanded-display');
+  };
+
+  async refreshData() {
     const dummyUrlAPI = 'http://dummy.restapiexample.com/api/v1/employees';
+
     try {
       const res = await fetch(dummyUrlAPI);
       const employees = await res.json();
@@ -19,19 +34,16 @@ class Employees extends Component {
     }
   }
 
-  handleClick = (event) => {
-    event.currentTarget.classList.toggle('active');
-    event.currentTarget.children[0].classList.toggle('employee-expanded-display');
-  };
-
   renderEmployee = (key, name, salary, age) => {
     return (
       <div key={key} onClick={this.handleClick} className="employee">
         {name}
         <div className="employee-expanded">
-          Salary: {salary}
+          Salary:
+          {salary}
           {'\n'}
-          Age: {age}
+          Age:
+          {age}
         </div>
       </div>
     );
