@@ -26,6 +26,18 @@ body {
   overflow: hidden;
   background-color: #f1f1f1;
 }
-.employee-expanded-display {
+
+.notification {
+  display: none;
+  color: red;
+  padding: 10px;
+  align-self: right;
+  margin: 0 auto;
+  width: 90%;
+  height: 25px;
+  border: 1px solid green;
+}
+
+.display-flex {
   display: flex;
 }
