@@ -1,0 +1,31 @@
+body {
+  color: black;
+}
+
+.container-employees {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.employee {
+  margin: 5px;
+  width: 30%;
+  border: 1px solid green;
+}
+
+.active,
+.employee:hover {
+  background-color: #ccc;
+}
+
+.employee-expanded {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+.employee-expanded-display {
+  display: block;
+}
