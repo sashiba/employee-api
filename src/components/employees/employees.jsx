@@ -5,7 +5,6 @@ class Employees extends Component {
   state = {
     employees: [],
     sorting: 'age',
-    display: 'none',
   };
 
   async componentDidMount() {
@@ -19,9 +18,8 @@ class Employees extends Component {
 
     if (prevState.employees.length > 0) {
       if (prevState.employees[0].id !== employees[0].id) {
-        this.setState({ updated: true });
-
         this.notif.classList.add('display-flex');
+        this.setUpdate();
       }
     }
   }
@@ -29,6 +27,14 @@ class Employees extends Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+
+  setUpdate = () => {
+    setTimeout(() => {
+      if (this.notif.classList.contains('display-flex')) {
+        this.notif.classList.remove('display-flex');
+      }
+    }, 3000);
+  };
 
   handleClick = (event) => {
     event.currentTarget.classList.toggle('active');
@@ -97,7 +103,12 @@ class Employees extends Component {
 
     return (
       <div>
-        <div className="notification" ref={(notif) => (this.notif = notif)}>
+        <div
+          className="notification"
+          ref={(notif) => {
+            this.notif = notif;
+          }}
+        >
           Updated employees!
         </div>
         <div className="container-employees">
