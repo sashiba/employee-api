@@ -10,8 +10,8 @@ class Employees extends Component {
 
   async componentDidMount() {
     await this.refreshData();
-    this.interval = setInterval(() => this.refreshData(), 10000);
-    this.intervalSortChange = setInterval(() => this.changeSort(), 10000);
+
+    this.interval = setInterval(() => this.wrapperInterval(), 10000);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -28,7 +28,6 @@ class Employees extends Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
-    clearInterval(this.intervalSortChange);
   }
 
   handleClick = (event) => {
@@ -51,6 +50,11 @@ class Employees extends Component {
 
     this.setState({ sorting: newSorting });
   };
+
+  wrapperInterval() {
+    this.changeSort();
+    this.refreshData();
+  }
 
   async refreshData() {
     const dummyUrlAPI = 'http://dummy.restapiexample.com/api/v1/employees';
